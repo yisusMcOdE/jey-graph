@@ -1,38 +1,237 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alkatra&display=swap');
+
+body{
+    margin: 0px;
+    overflow-x: hidden;
+}
+body select{
+    padding: 3px;
+    border-radius: 5px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*----------------NavBar Styles----------------*/
+.NavBar{
+    width: 100vw;
+    height: 10vh;
+    background-color: gray;
+    text-align: center;
+    color: white;
+    font-family: 'Permanent Marker', cursive;
+    letter-spacing: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   
+}
+.NavBar h1{
+    margin-right: 50px;
+}
+.NavBar .toogleMenuValues{
+    margin-left: 15px;
+    cursor: pointer;
+    font-size: large;
+    background-color: white;
+    color: rgb(58, 58, 58);
+    padding: 5px 15px;
+    border-radius: 5px;
+    letter-spacing: 3px;
+    transition: all .5s ease;
+}
+.NavBar .toogleMenuValues .icon{
+    margin-right: 10px;
+}
+.NavBar .toogleMenuValues:hover{
+    background-color: rgb(58, 58, 58);
+    color: white
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+/*----------------Body Styles----------------*/
+.panel{
+    display: flex;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+/*----------------SideBar Styles----------------*/
+.sideBar{
+    background-color: rgb(216, 216, 216);
+    height: 90vh;
+    width: 15vw;
+    font-family: 'Alkatra', cursive;
+    color: rgb(58, 58, 58);
+    text-align: center;
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: all .5s ease;
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+.sideBarTittle {
+    height: 10%;
+}
+.sideBar .itemsContainer{
+    height: 85%;
+    overflow-y: scroll;
+}
+.sideBar.close{
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all .5s ease;
+    width: 0vw;
 }
 
-.App-link {
-  color: #61dafb;
+
+.itemsContainer::-webkit-scrollbar {
+    width: 0;
+}
+.itemSystemValue{
+    text-align: left;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.itemSystemValue .titleItem{
+    width: calc(70% + 20px);
+    display: flex;
+    justify-content: space-between;
+}
+.inputIncrement{
+    width: 30%;
+    border: none;
+    padding: 5px;
+    align-self: flex-end;
+    outline: none;
+    text-align: right;
+    border-radius: 5px 5px 0 0;
+}
+.inputIncrement:focus{
+    border: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.itemSystemValue .inputValue{
+    border: none;
+    padding: 10px;
+    width: 70%;
+    border-radius: 4px 0 4px 4px;
+}
+.inputValue:hover{
+    background-color: rgb(60, 122, 60);
+    cursor: row-resize;
+    transition: all .5s ease;
+}
+.inputValue:focus{
+    background-color: rgb(43, 87, 43);
+}
+
+.itemsContainer:has(.inputValue:hover){
+    overflow-y: hidden;
+}
+
+
+/*----------------Graph Area Styles----------------*/
+.graphArea{
+    background-color: white;
+    height: 90vh;
+    width: 65vw;
+    text-align: center;
+    grid-row-start: 1;
+    transition: all .5s ease;
+    position: relative;
+}
+.graphArea .buttonTable{
+    position:absolute;
+    background-color: rgb(80, 136, 80);
+    right: 0;
+    z-index: 1;
+    margin: 15px;
+    font-size: x-large;
+    padding: 4px 15px;
+    border-radius: 5px;
+    color: white;
+    transition: all .5s ease;
+    cursor: pointer;
+}
+.graphArea .buttonTable:hover{
+    background-color: rgb(63, 109, 63);
+}
+
+.graphArea .buttonTable.open{
+    background-color: rgb(134, 20, 20);
+}
+.graphArea .buttonTable.open:hover{
+    background-color: rgb(104, 16, 16);
+}
+
+.graphArea .containerMenuGraph{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    margin: 15px;
+}
+.containerMenuGraph .buttonMenuGraph{
+    background-color: white;
+    width: 80px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 2px;
+    transition: all .5s ease;
+    border: 1px solid black;
+}
+.buttonMenuGraph.open{
+    border-radius: 5px 5px 0px 0px;
+    background-color: rgb(221, 221, 221);
+}
+.containerMenuGraph .buttonMenuGraph:hover{
+    background-color: rgb(221, 221, 221);
+    transition: all .5s ease;
+}
+
+.containerMenuGraph .optionsContainer{
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    transform: scale(0,0);
+    border-radius: 0px 5px 5px 5px;
+    border: 1px solid black;
+    transform-origin: top left;
+    transition: all .5s ease;
+
+    display: flex;
+    flex-direction: column;
+    font-size: small;
+    align-items: flex-start;
+    row-gap: 5px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.optionsContainer.open{
+    transform: scale(1,1);
+}
+.lineGraph{
+    padding-top: 25px;
+    height: calc(100% - 25px);
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+
+/*----------------DataTable Styles----------------*/
+.dataTable{
+    height: 90vh;
+    width: 20vw;
+    border-left: 1px solid rgb(216, 216, 216);
+    font-family: 'Alkatra', cursive;
+    color: rgb(58, 58, 58);
+    text-align: center;
+    grid-row-start: 1;
+    grid-column-start: 3;
+    transform: scaleX(1);
+    transition: all .5s ease;
+    transform-origin: right;
+}
+.dataTable.close{
+    transform: scaleX(0);
+    width: 0vw;
 }
