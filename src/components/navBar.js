@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { selectToogleValues } from '../features/toogleMenuSlice';
+import { selectToogleValues } from '../features/toogleSlice';
 
 export const Navbar = () => {
 
@@ -10,7 +10,7 @@ export const Navbar = () => {
 
     const handleToogleValues = () => {
         const action = {
-            type: "toogleMenu/values"
+            type: "toogle/values"
         }
         dispatcher(action);
     }

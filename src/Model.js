@@ -1,87 +1,92 @@
+
+
 {/*---------------EQUATION VARIABLES---------------*/}
 export const variablesInit = [
     {   
         name: "step",
-        value: 0.125,
-        locked:true 
+        value: 0.025,
+        locked: true 
     },
     {   
         name: "tiempo",
         value: 100,
-        locked:false 
     },
-    {   
+    {
         name: "x0",
-        value: 2,
-        locked:false 
+        value: 1
     },
-    {   
+    {
         name: "y0",
-        value: 1,
-        locked:false 
+        value: 2
     },
-    {   
-        name: "alpha",
-        value: 0.2,
-        locked:false 
+    {
+        name: "z0",
+        value: 1
     },
-    {   
-        name: "betha",
-        value: 0.27,
-        locked:false 
+    {
+        name: "alfa",
+        value: 0.398
     },
-    {   
-        name: "delta",
-        value: 0.2,
-        locked:false 
+    {
+        name: "beta",
+        value: 2
     },
-    {   
+    {
         name: "gama",
-        value: 0.33,
-        locked:false }
+        value: 4
+    },
 ]
 
 
 {/*---------------VALUES SYSTEM---------------*/}
 export const valuesInit = {
-    xValues : [] ,
-    yValues : [] ,
-    combinacion : []
+    xy:[],
+    yz:[],
+    zx:[],
+    xyz:[]
 }
 
 
 {/*---------------SIMULATOR FUNCTION---------------*/}
 {/*------------WRITE YOUR EQUATION HERE--------------*/}
 export const simulator = (variables) => {
-    let combinacionValues = []
-    let xValues = [];
-    let x = variables.x0;
-    xValues.push( { x : 0, y : x } );
 
-    let yValues = [];
-    let y = variables.y0;
-    yValues.push( { x : 0, y : y } );
+    let xyValues = [];
+    let yzValues = [];
+    let zxValues = [];
+    let xyzValues = [];
 
-    combinacionValues.push({x : x, y : y});
+    let x  = variables.x0;
+    let y  = variables.y0;
+    let z  = variables.z0;
+
+    xyValues.push( { x : x, y : y } );
+    yzValues.push( { x : y, y : z } );
+    zxValues.push( { x : z, y : x } );
+    xyzValues.push( {x : x, y : y, z : z});
 
     for (let t = variables.step; t <= variables.tiempo; t += variables.step) {
 
-        let xAnt = x;
-        let yAnt = y;
+        let xAnt=x;
+        let yAnt=y;
+        let zAnt=z;
 
-        x = xAnt+(((variables.alpha*xAnt)-(variables.betha*xAnt*yAnt))*variables.step);
-        xValues.push({x : t, y:x});
-
-        y = yAnt+(((variables.gama*xAnt*yAnt)-(variables.delta*yAnt))*variables.step);
-        yValues.push({x : t, y:y});
-
-
-        combinacionValues.push({x : x, y : y});
+        x += ((-yAnt-zAnt)*variables.step);
+        y += ((xAnt+(variables.alfa*yAnt))*variables.step);
+        z += ((variables.beta-(variables.gama*zAnt)+(xAnt*zAnt))*variables.step);
+        
+        xyValues.push( { x : x, y : y } );
+        yzValues.push( { x : y, y : z } );
+        zxValues.push( { x : z, y : x } );
+        xyzValues.push( {x : x, y : y, z : z});
 
     }
-
-
-    return {xValues : xValues, yValues : yValues, combinacion : combinacionValues};
+    return {
+        xy : xyValues,
+        yz : yzValues,
+        zx : zxValues,
+        xyz : xyzValues
+    };
 }
 
 
@@ -92,29 +97,41 @@ export const makeGraphics = (values=valuesInit) => {
     const graphs=[
         {
             type : "2D",
-            name : "Lotka",
+            name : "XY",
             datasets : [
                 {
                     type:"scatter", /*<---REQUIRED--*/
-                    label: "presa",
-                    data: [...values.xValues]
-                },
-                {
-                    type:"scatter", /*<---REQUIRED--*/
-                    label: "predator",
-                    data: [...values.yValues]
+                    label: "X-Y",
+                    data: [...values.xy]
                 }
             ]
-        },{
+        },
+        {
             type : "2D",
-            name : "Lotka relacion",
+            name : "YZ",
             datasets : [
                 {
                     type:"scatter", /*<---REQUIRED--*/
-                    label: "ambos",
-                    data: [...values.combinacion]
+                    label: "Y-Z",
+                    data: [...values.yz]
                 }
             ]
+        },
+        {
+            type : "2D",
+            name : "ZX",
+            datasets : [
+                {
+                    type:"scatter", /*<---REQUIRED--*/
+                    label: "Z-X",
+                    data: [...values.zx]
+                }
+            ]
+        },
+        {
+            type : "3D",
+            name : "XYZ",
+            data: [...values.xyz]
         }
     ]
 

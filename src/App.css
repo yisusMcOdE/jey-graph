@@ -5,7 +5,7 @@ body{
     margin: 0px;
     overflow-x: hidden;
 }
-body select{
+select{
     padding: 3px;
     border-radius: 5px;
 }
@@ -119,6 +119,8 @@ body select{
     background-color: rgb(60, 122, 60);
     cursor: row-resize;
     transition: all .5s ease;
+    color: black;
+    font-weight: bolder;
 }
 .inputValue:focus{
     background-color: rgb(43, 87, 43);
@@ -175,26 +177,30 @@ body select{
     width: 80px;
     cursor: pointer;
     border-radius: 5px;
-    padding: 2px;
+    padding: 5px;
     transition: all .5s ease;
-    border: 1px solid black;
+    border: 1px solid rgb(165, 165, 165);
 }
 .buttonMenuGraph.open{
     border-radius: 5px 5px 0px 0px;
-    background-color: rgb(221, 221, 221);
+    border: 0px;
+    background-color: rgb(58, 58, 58);
+    color: white;
+    transition: all .5s ease;
 }
 .containerMenuGraph .buttonMenuGraph:hover{
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(58, 58, 58);
+    color: white;
     transition: all .5s ease;
+    border: 0px;
 }
 
 .containerMenuGraph .optionsContainer{
-    height: 150px;
+    height: 230px;
     width: 150px;
-    background-color: white;
+    background-color: rgb(119, 119, 119);
     transform: scale(0,0);
     border-radius: 0px 5px 5px 5px;
-    border: 1px solid black;
     transform-origin: top left;
     transition: all .5s ease;
 
@@ -214,7 +220,7 @@ body select{
     height: calc(100% - 25px);
     display: flex;
     justify-content: center;
-    background-color: black;
+    transition: all .5s ease;
 }
 
 /*----------------DataTable Styles----------------*/
@@ -223,6 +229,7 @@ body select{
     width: 20vw;
     border-left: 1px solid rgb(216, 216, 216);
     font-family: 'Alkatra', cursive;
+    background-color: rgb(216, 216, 216);
     color: rgb(58, 58, 58);
     text-align: center;
     grid-row-start: 1;
@@ -230,8 +237,37 @@ body select{
     transform: scaleX(1);
     transition: all .5s ease;
     transform-origin: right;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.dataTable h2{
+    margin: 0px;
+    margin-top: 20px;
+}
+.dataTable select{
+    width: 50%;
+    align-self: center;
+    padding: 7px;
+}
+.dataTable .tableContainer{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
 }
 .dataTable.close{
     transform: scaleX(0);
     width: 0vw;
+}
+.dataTable table{
+    width: min-content;
+}
+.dataTable td{
+    text-align: left;
+    padding-left: 5px;
+}
+.dataTable th{
+    background-color: rgb(58, 58, 58);
+    color: white;
+    padding: 5px 15px;
 }

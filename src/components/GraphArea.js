@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { selectToogleValues, selectToogleTable, selectToogleMenuGraph, selectGraphSelected } from "../features/toogleMenuSlice";
+import { selectToogleValues, selectToogleTable, selectToogleMenuGraph, selectGraphSelected, selectToogleLight } from "../features/toogleSlice";
 import { LineGraph } from "../graphs/LineGraph.js";
 import { makeGraphics } from "../Model";
 import { useEffect } from "react";
@@ -17,6 +17,7 @@ export const GraphArea = () => {
     const toogleTable = useSelector(selectToogleTable);
     const toogleMenu = useSelector(selectToogleMenuGraph);
     const toogleGraphSelected = useSelector(selectGraphSelected);
+    const light = useSelector(selectToogleLight);
 
     const type = graphs.find(item=>item.name===toogleGraphSelected)!==undefined ? 
                     graphs.find(item=>item.name===toogleGraphSelected).type : 
@@ -24,29 +25,57 @@ export const GraphArea = () => {
 
     const handleToogleTable = () => {
         const action = {
-            type : "toogleMenu/table"
+            type : "toogle/table"
         }
         dispatcher(action);
     }
 
     const handleToogleMenuGraph = () => {
         const action = {
-            type : "toogleMenu/menuGraph"
+            type : "toogle/menuGraph"
         }
         dispatcher(action);
     }
 
     const handleSelectGraph = ({target}) => {
         const action = {
-            type : "toogleMenu/graphSelected",
+            type : "toogle/graphSelected",
             payload : target.value
+        }
+        dispatcher(action);
+    }
+
+    const handleToogleLines = (e) => {
+        const action = {
+            type : "toogle/lines"
+        }
+        dispatcher(action);
+    }
+
+    const handleTooglePoints = (e) => {
+        const action = {
+            type : "toogle/points"
+        }
+        dispatcher(action);
+    }
+
+    const handleToogleTooltip = (e) => {
+        const action = {
+            type : "toogle/tooltip"
+        }
+        dispatcher(action);
+    }
+
+    const handleToogleLight = (e) => {
+        const action = {
+            type : "toogle/light"
         }
         dispatcher(action);
     }
 
     useEffect(()=>{
         const action = {
-            type : "toogleMenu/graphSelected",
+            type : "toogle/graphSelected",
             payload : names[0]
         }
         dispatcher(action);
@@ -72,10 +101,14 @@ export const GraphArea = () => {
                     <select onChange={handleSelectGraph}>
                         {names.map( item => <option key={item} value={item}> {item} </option>)}
                     </select>
+                    <label>Lines?</label>
+                    <input type={"checkbox"} onChange={handleToogleLines} defaultChecked/>
                     <label>Points?</label>
-                    <input type={"checkbox"}/>
-                    <label>background black?</label>
-                    <input type={"checkbox"}/>
+                    <input type={"checkbox"} onChange={handleTooglePoints} />
+                    <label>Tooltip?</label>
+                    <input type={"checkbox"} onChange={handleToogleTooltip} defaultChecked/>
+                    <label>Light mode?</label>
+                    <input type={"checkbox"} onChange={handleToogleLight}/>
                 </div>
             </div>
 
@@ -89,8 +122,8 @@ export const GraphArea = () => {
 
             { 
                 type==='3D' ? 
-                <Canvas camera={ { fov: 75, near: 0.1, far: 1000, position: [25, 10, 25] } }>
-                    <color attach="background" args={["black"]} />
+                <Canvas camera={ { fov: 75, near: 0.1, far: 1000, position: [10, 10, 10] } }>
+                    <color attach="background" args={light?["white"]:["black"]} />
                     <ambientLight intensity={0.5} />
                     <OrbitControls/>
                     <directionalLight position={[-2, 5, 2]} intensity={1} />

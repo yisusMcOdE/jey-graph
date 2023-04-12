@@ -1,5 +1,5 @@
 import { ItemSystemValue } from "./ItemSystemValue";
-import { selectToogleValues } from "../features/toogleMenuSlice";
+import { selectToogleValues } from "../features/toogleSlice";
 import { selectVariables, selectVariablesNumber } from "../features/variablesSclice";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
