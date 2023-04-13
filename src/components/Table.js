@@ -1,43 +1,46 @@
-import { selectToogleRound } from "../features/toogleSlice";
+import { selectToggleRound } from "../store/slices/toggleSlice";
 import { useSelector } from "react-redux";
 
 export const Table = ({values}) => {
 
-    const round = useSelector(selectToogleRound);
+    const round = useSelector(selectToggleRound);
     const keys = [];
     for (const key in values[0]) {
         keys.push(key);
     }
-    console.log(keys);
 
     return (
         <table style={round?{alignSelf:"center"}:{alignSelf:"flex-start"}}>
-            <tr>
-                {
-                    keys.map(item=><th>{item.toUpperCase()}</th>)
-                }
-            </tr>
-            {
-                values.map((item,index)=>{
-                    let style={}
-                    if(index%2===0){
-                        style={backgroundColor:"#B6B6B6"}
+            <thead>
+                <tr>
+                    {
+                        keys.map((item,index)=><th key={index}>{item.toUpperCase()}</th>)
                     }
-                    return <tr style={style}>
-                        {
-                            keys.map((axis,index)=>{
-                                return <td>
-                                    {
-                                        round ?
-                                        Number((item[axis]).toFixed(5)) :
-                                        item.x
-                                    }
-                                </td>
-                            })
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    values.map((item,index)=>{
+                        let style={}
+                        if(index%2===0){
+                            style={backgroundColor:"#B6B6B6"}
                         }
-                    </tr>
-                })
-            }
+                        return <tr style={style} key={index}>
+                            {
+                                keys.map((axis,index)=>{
+                                    return <td key={index}>
+                                        {
+                                            round ?
+                                            Number((item[axis]).toFixed(5)) :
+                                            item.x
+                                        }
+                                    </td>
+                                })
+                            }
+                        </tr>
+                    })
+                }
+            </tbody>
         </table>
     )
 }

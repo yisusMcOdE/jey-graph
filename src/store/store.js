@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import toogleReducer from './features/toogleSlice.js';
-import variableReducer from './features/variablesSclice.js';
-import valuesReducer from './features/valuesSlice.js';
+import toggleReducer from './slices/toggleSlice.js';
+import variableReducer from './slices/variablesSlice.js';
+import valuesReducer from './slices/valuesSlice.js';
 
 const options = {
     reducer : {
-        toogle : toogleReducer,
+        toggle : toggleReducer,
         variables : variableReducer,
         values : valuesReducer
     }

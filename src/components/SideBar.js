@@ -1,6 +1,6 @@
 import { ItemSystemValue } from "./ItemSystemValue";
-import { selectToogleValues } from "../features/toogleSlice";
-import { selectVariables, selectVariablesNumber } from "../features/variablesSclice";
+import { selectToggleValues } from "../store/slices/toggleSlice";
+import { selectVariables, selectVariablesNumber } from "../store/slices/variablesSlice";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { simulator } from "../Model";
@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 
 export const SideBar = () => {
 
-    const toogle = useSelector(selectToogleValues);
+    const toggle = useSelector(selectToggleValues);
     const variables = useSelector(selectVariables);
     const variablesNumber = useSelector (selectVariablesNumber);
     const dispatcher = useDispatch();
@@ -24,7 +24,7 @@ export const SideBar = () => {
 
     return (
         <div 
-            className={toogle ? 'sideBar' : 'sideBar close'}
+            className={toggle ? 'sideBar' : 'sideBar close'}
         >
           <div className="sideBarTittle">
             <h2>System Values</h2>
@@ -34,11 +34,13 @@ export const SideBar = () => {
             {
               variables.map( (item,index) => { 
                 return  <ItemSystemValue 
-                          key={`${item.name}${index}`} 
-                          name={item.name} 
-                          value={item.value} 
-                          increment={item.increment} 
-                          locked={item.locked ? true : false}
+                          key = {`${item.name}${index}`} 
+                          name = {item.name} 
+                          value = {item.value} 
+                          step = {item.step} 
+                          locked = {item.locked ? true : false}
+                          min = {item.min}
+                          max = {item.max}
                         /> 
               }) 
             }            

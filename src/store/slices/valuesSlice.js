@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { valuesInit } from "../Model";
+import { valuesInit } from "../../Model";
 
 const options = {
     name : "values",

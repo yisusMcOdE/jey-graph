@@ -1,25 +1,25 @@
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { selectToogleValues } from '../features/toogleSlice';
+import { selectToggleValues } from '../store/slices/toggleSlice';
 
 export const Navbar = () => {
 
     const dispatcher = useDispatch();
 
-    const toogle = useSelector(selectToogleValues);
+    const toggle = useSelector(selectToggleValues);
 
-    const handleToogleValues = () => {
+    const handleToggleValues = () => {
         const action = {
-            type: "toogle/values"
+            type: "toggle/values"
         }
         dispatcher(action);
     }
 
     return (
         <div className="NavBar">
-            <div className='toogleMenuValues' onClick={handleToogleValues}>
+            <div className='toggleMenuValues' onClick={handleToggleValues}>
                 {
-                    toogle ?
+                    toggle ?
                     <i className="bi bi-arrow-left-square-fill icon iconMenu">Hide Values</i>
                      :
                     <i className="bi bi-arrow-right-square-fill icon iconMenu">Show Values</i>

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { selectToogleValues, selectToogleTable, selectToogleMenuGraph, selectGraphSelected, selectToogleLight } from "../features/toogleSlice";
+import { selectToggleValues, selectToggleTable, selectToggleMenuGraph, selectGraphSelected, selectToggleLight } from "../store/slices/toggleSlice";
 import { LineGraph } from "../graphs/LineGraph.js";
 import { makeGraphics } from "../Model";
 import { useEffect } from "react";
@@ -13,75 +13,75 @@ export const GraphArea = () => {
     const [graphs,names] = makeGraphics();
 
     const dispatcher = useDispatch();
-    const toogleValue = useSelector(selectToogleValues);
-    const toogleTable = useSelector(selectToogleTable);
-    const toogleMenu = useSelector(selectToogleMenuGraph);
-    const toogleGraphSelected = useSelector(selectGraphSelected);
-    const light = useSelector(selectToogleLight);
+    const toggleValue = useSelector(selectToggleValues);
+    const toggleTable = useSelector(selectToggleTable);
+    const toggleMenu = useSelector(selectToggleMenuGraph);
+    const toggleGraphSelected = useSelector(selectGraphSelected);
+    const light = useSelector(selectToggleLight);
 
-    const type = graphs.find(item=>item.name===toogleGraphSelected)!==undefined ? 
-                    graphs.find(item=>item.name===toogleGraphSelected).type : 
+    const type = graphs.find(item=>item.name===toggleGraphSelected)!==undefined ? 
+                    graphs.find(item=>item.name===toggleGraphSelected).type : 
                     "";
 
-    const handleToogleTable = () => {
+    const handleToggleTable = () => {
         const action = {
-            type : "toogle/table"
+            type : "toggle/table"
         }
         dispatcher(action);
     }
 
-    const handleToogleMenuGraph = () => {
+    const handleToggleMenuGraph = () => {
         const action = {
-            type : "toogle/menuGraph"
+            type : "toggle/menuGraph"
         }
         dispatcher(action);
     }
 
     const handleSelectGraph = ({target}) => {
         const action = {
-            type : "toogle/graphSelected",
+            type : "toggle/graphSelected",
             payload : target.value
         }
         dispatcher(action);
     }
 
-    const handleToogleLines = (e) => {
+    const handleToggleLines = (e) => {
         const action = {
-            type : "toogle/lines"
+            type : "toggle/lines"
         }
         dispatcher(action);
     }
 
-    const handleTooglePoints = (e) => {
+    const handleTogglePoints = (e) => {
         const action = {
-            type : "toogle/points"
+            type : "toggle/points"
         }
         dispatcher(action);
     }
 
-    const handleToogleTooltip = (e) => {
+    const handleToggleTooltip = (e) => {
         const action = {
-            type : "toogle/tooltip"
+            type : "toggle/tooltip"
         }
         dispatcher(action);
     }
 
-    const handleToogleLight = (e) => {
+    const handleToggleLight = (e) => {
         const action = {
-            type : "toogle/light"
+            type : "toggle/light"
         }
         dispatcher(action);
     }
 
     useEffect(()=>{
         const action = {
-            type : "toogle/graphSelected",
+            type : "toggle/graphSelected",
             payload : names[0]
         }
         dispatcher(action);
     },[])
 
-    const widthGraph = `${65 + (!toogleValue ? 15 : 0) + (!toogleTable? 20 : 0)}vw`;
+    const widthGraph = `${65 + (!toggleValue ? 15 : 0) + (!toggleTable? 20 : 0)}vw`;
     return (
         <div 
           className="graphArea"
@@ -91,31 +91,31 @@ export const GraphArea = () => {
             {/*-----------Menu Graph-----------*/}
             <div className="containerMenuGraph">
                 <div 
-                    className={!toogleMenu?"buttonMenuGraph":"buttonMenuGraph open"}
-                    onClick={handleToogleMenuGraph}
+                    className={!toggleMenu?"buttonMenuGraph":"buttonMenuGraph open"}
+                    onClick={handleToggleMenuGraph}
                 >
                     Options
                 </div>
-                <div className={!toogleMenu?"optionsContainer":"optionsContainer open"}>
+                <div className={!toggleMenu?"optionsContainer":"optionsContainer open"}>
                     <label>Select your graph</label>
                     <select onChange={handleSelectGraph}>
                         {names.map( item => <option key={item} value={item}> {item} </option>)}
                     </select>
                     <label>Lines?</label>
-                    <input type={"checkbox"} onChange={handleToogleLines} defaultChecked/>
+                    <input type={"checkbox"} onChange={handleToggleLines} defaultChecked/>
                     <label>Points?</label>
-                    <input type={"checkbox"} onChange={handleTooglePoints} />
+                    <input type={"checkbox"} onChange={handleTogglePoints} />
                     <label>Tooltip?</label>
-                    <input type={"checkbox"} onChange={handleToogleTooltip} defaultChecked/>
+                    <input type={"checkbox"} onChange={handleToggleTooltip} defaultChecked/>
                     <label>Light mode?</label>
-                    <input type={"checkbox"} onChange={handleToogleLight}/>
+                    <input type={"checkbox"} onChange={handleToggleLight} defaultChecked/>
                 </div>
             </div>
 
             {/*-----------Button Data Table-----------*/}
             <div 
-                className={!toogleTable?"buttonTable":"buttonTable open"} 
-                onClick={handleToogleTable}
+                className={!toggleTable?"buttonTable":"buttonTable open"} 
+                onClick={handleToggleTable}
             >
                 <i className="bi bi-table"></i>
             </div>

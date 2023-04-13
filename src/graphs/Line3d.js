@@ -3,17 +3,17 @@ import React from 'react';
 
 import { makeGraphics } from '../Model';
 import { useSelector } from 'react-redux';
-import { selectValues } from '../features/valuesSlice';
-import { selectGraphSelected, selectToogleLight, selectTooglePoints, selectToogleLines } from '../features/toogleSlice';
+import { selectValues } from '../store/slices/valuesSlice';
+import { selectGraphSelected, selectToggleLight, selectTogglePoints, selectToggleLines } from '../store/slices/toggleSlice';
 
 
 export const Line3d = () => {
 
     const values = useSelector(selectValues);
     const nameGraphSelected = useSelector(selectGraphSelected);
-    const light = useSelector(selectToogleLight);
-    const points = useSelector(selectTooglePoints);
-    const line = useSelector(selectToogleLines);
+    const light = useSelector(selectToggleLight);
+    const points = useSelector(selectTogglePoints);
+    const line = useSelector(selectToggleLines);
     const [graph] = makeGraphics(values);
     const index =  graph.findIndex(item => item.name===nameGraphSelected);
     const pointsLine = [];

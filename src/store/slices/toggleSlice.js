@@ -1,16 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const options = {
-    name : 'toogle',
+    name : 'toggle',
     initialState : {
         values : true,
         table : false,
         menuGraph : false,
         points : false,
         tooltip : true,
-        light : false,
+        light : true,
         round : true,
         lines : true,
+        changeByScroll : false,
         graphSelected : "",
     },
     reducers : {
@@ -22,20 +23,22 @@ const options = {
         "light" : (state, action) => {return {...state, light:!state.light}},
         "round" : (state, action) => {return {...state, round:!state.round}},
         "lines" : (state, action) => {return {...state, lines:!state.lines}},
+        "changeByScroll" : (state, action) => {return {...state, changeByScroll:!state.changeByScroll}},
         "graphSelected" : (state, action) => {return {...state, graphSelected:action.payload}},
     }
 }
 
-const toogleSlice = createSlice(options);
+const toggleSlice = createSlice(options);
 
-export const selectToogleValues = (state) => state.toogle.values;
-export const selectToogleTable = (state) => state.toogle.table;
-export const selectToogleMenuGraph = (state) => state.toogle.menuGraph;
-export const selectGraphSelected = (state) => state.toogle.graphSelected;
-export const selectTooglePoints = (state) => state.toogle.points;
-export const selectToogleLight = (state) => state.toogle.light;
-export const selectToogleTooltip = (state) => state.toogle.tooltip;
-export const selectToogleRound = (state) => state.toogle.round;
-export const selectToogleLines = (state) => state.toogle.lines;
+export const selectToggleValues = (state) => state.toggle.values;
+export const selectToggleTable = (state) => state.toggle.table;
+export const selectToggleMenuGraph = (state) => state.toggle.menuGraph;
+export const selectGraphSelected = (state) => state.toggle.graphSelected;
+export const selectTogglePoints = (state) => state.toggle.points;
+export const selectToggleLight = (state) => state.toggle.light;
+export const selectToggleTooltip = (state) => state.toggle.tooltip;
+export const selectToggleRound = (state) => state.toggle.round;
+export const selectToggleLines = (state) => state.toggle.lines;
+export const selectChangeByScroll = (state) => state.toggle.changeByScroll;
 
-export default toogleSlice.reducer;
+export default toggleSlice.reducer;

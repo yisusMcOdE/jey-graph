@@ -1,26 +1,29 @@
 import React from 'react';
 import { Chart } from 'react-chartjs-2'
 import 'chart.js/auto';
-import { selectValues } from '../features/valuesSlice';
+import { selectValues } from '../store/slices/valuesSlice';
 import { useSelector } from 'react-redux';
 import { makeGraphics } from '../Model';
-import { selectGraphSelected, selectTooglePoints, selectToogleTooltip, selectToogleLight, selectToogleLines } from '../features/toogleSlice';
+import { selectGraphSelected, selectTogglePoints, selectToggleTooltip, selectToggleLight, selectToggleLines } from '../store/slices/toggleSlice';
 
 export const LineGraph = () => {
 
     const values = useSelector(selectValues);
     const nameGraphSelected = useSelector(selectGraphSelected);
-    const lines = useSelector(selectToogleLines);
-    const points = useSelector(selectTooglePoints);
-    const tooltip = useSelector(selectToogleTooltip);
-    const light = useSelector(selectToogleLight);
+    const lines = useSelector(selectToggleLines);
+    const points = useSelector(selectTogglePoints);
+    const tooltip = useSelector(selectToggleTooltip);
+    const light = useSelector(selectToggleLight);
 
     const [graph] = makeGraphics(values);
 
+
     let graphSelected =  graph.findIndex(item=>item.name===nameGraphSelected);
+    
     if(graphSelected === -1)
       graphSelected = 0
 
+    graph[graphSelected].datasets.map(item=>item.type="scatter");
 
     const data = {
         datasets: (graph[graphSelected].datasets)
@@ -71,7 +74,6 @@ export const LineGraph = () => {
         item.borderWidth = 3
       })
     }
-    console.log(data.datasets);
     
 
     return(

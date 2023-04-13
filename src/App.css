@@ -26,7 +26,7 @@ select{
 .NavBar h1{
     margin-right: 50px;
 }
-.NavBar .toogleMenuValues{
+.NavBar .toggleMenuValues{
     margin-left: 15px;
     cursor: pointer;
     font-size: large;
@@ -37,10 +37,10 @@ select{
     letter-spacing: 3px;
     transition: all .5s ease;
 }
-.NavBar .toogleMenuValues .icon{
+.NavBar .toggleMenuValues .icon{
     margin-right: 10px;
 }
-.NavBar .toogleMenuValues:hover{
+.NavBar .toggleMenuValues:hover{
     background-color: rgb(58, 58, 58);
     color: white
 }
@@ -80,10 +80,6 @@ select{
     width: 0vw;
 }
 
-
-.itemsContainer::-webkit-scrollbar {
-    width: 0;
-}
 .itemSystemValue{
     text-align: left;
     margin-top: 20px;
@@ -116,18 +112,29 @@ select{
     border-radius: 4px 0 4px 4px;
 }
 .inputValue:hover{
-    background-color: rgb(60, 122, 60);
-    cursor: row-resize;
+    background-color: rgb(101, 213, 101);
+    cursor: pointer;
     transition: all .5s ease;
     color: black;
     font-weight: bolder;
 }
 .inputValue:focus{
-    background-color: rgb(43, 87, 43);
+    background-color: rgb(122, 255, 122);
 }
 
+/*
+    ScrollChange
 .itemsContainer:has(.inputValue:hover){
     overflow-y: hidden;
+}*/
+.selectValue{
+    border: none;
+    padding: 10px;
+    width: 80%;
+    border-radius: 4px;
+}
+.selectValue-styled{
+    border: none;
 }
 
 

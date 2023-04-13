@@ -1,6 +1,6 @@
-import { selectToogleTable } from "../features/toogleSlice";
+import { selectToggleTable } from "../store/slices/toggleSlice";
 import { useDispatch } from "react-redux";
-import { selectValues } from "../features/valuesSlice";
+import { selectValues } from "../store/slices/valuesSlice";
 import { useSelector } from "react-redux";
 import { Table } from "./Table";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export const DataTable = () => {
 
-    const toogleTable = useSelector(selectToogleTable);
+    const toggleTable = useSelector(selectToggleTable);
     const values = useSelector(selectValues);
     const dispatcher = useDispatch();
     const names = [];
@@ -19,15 +19,15 @@ export const DataTable = () => {
 
     const [selected, setSelected] = useState(names[0]);
 
-    const handleToogleRound = () => {
+    const handleToggleRound = () => {
       const action = {
-        type : "toogle/round"
+        type : "toggle/round"
     }
     dispatcher(action);
     }
 
     return (
-        <div className={toogleTable?"dataTable":"dataTable close"}>
+        <div className={toggleTable?"dataTable":"dataTable close"}>
           <h2>Data Table</h2>
           <select onChange={({target})=>{setSelected(target.value)}}>
             {names.map((item, index)=>{
@@ -36,7 +36,7 @@ export const DataTable = () => {
           </select>
           <div>
             <label>¿Round?</label>
-            <input type="checkbox" defaultChecked onChange={handleToogleRound}/>
+            <input type="checkbox" defaultChecked onChange={handleToggleRound}/>
           </div>
           <div className="tableContainer">
             <Table values={values[selected]}/>
