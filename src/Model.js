@@ -20,7 +20,7 @@ export const variablesInit = [
     },
     {   
         name: "tiempo",
-        value: 100,
+        value: 10,
         min:0,
         max:250,
         step: 5
